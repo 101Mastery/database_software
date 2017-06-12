@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1> Formulas </h1>
+
+        {%with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    <ul>
+        {% for message in messages %}
+        <li><strong>{{ message}}</strong></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    </br>
+
+    <a href='{{url_for('newFormula')}}'>Create new Formula</a>
+
+    </br>
+    </br>
+
+    {% for i in formulas %}
+
+    Formula Name:
+    {{i.name}}
+    </br>
+
+    Formula Description:
+    {{i.description}}
+    </br>
+
+    <a href='{{url_for('editFormula', formula_id = i.id)}}'>Edit</a>
+    </br>
+    <a href='{{url_for('deleteFormula', formula_id = i.id)}}'>Delete</a>
+
+    </br>
+    </br>
+
+    {% endfor %}
+</body>
+</html>
