@@ -12,6 +12,6 @@ forumula = Formula(name="water", description="universal solvent")
 session.add(forumula)
 session.commit()
 
-test_user = User(name="Tester", title="testing developer")
+test_user = User(name="Tester", title="testing developer", is_authenticated=True, is_active=True, is_anonymous=False)
 session.add(test_user)
 session.commit()
