@@ -2,35 +2,44 @@
 Routes and views for the flask application.
 """
 from datetime import datetime
-from flask import render_template, request, redirect, flash, url_for
-from flask_server import session
+from flask import render_template, request, redirect, flash, url_for, session
 from project import app
-from project.database.make_database import Formula, User
+from manage import Formula, User
+from flask_server import db
 
 
 @app.route('/user')
 def printUsers():
+
     try:
-        session.user
+        db.session.user
     except:
         return redirect(url_for('login'))
 
-    formulas = session.query(User).all()
-    return render_template('user_templates/creation_menu.html', formulas=formulas)
+
+    users = User.query.all()
+    return render_template('user_templates/creation_menu.html', users=users)
 
 
 @app.route('/user/new', methods=['GET', 'POST'])
 def newUser():
+
     try:
-        session.user
+        db.session.user
     except:
         return redirect(url_for('login'))
 
+
     if request.method == 'POST':
-        new = Formula(name=request.form['name'])
-        session.add(new)
-        session.commit()
-        flash(new.name + " was created")
+        import logging
+        logging.warn(request.form['creation_user'])
+        if request.form['creation_user'] == 'True':
+            new = User(name=request.form['name'], title=request.form['title'], user_creator=True)
+        else:
+            new = User(name=request.form['name'], title=request.form['title'])
+        db.session.add(new)
+        db.session.commit()
+        flash("User was created")
         return redirect(url_for('printUsers'))
     else:
         return render_template('user_templates/new_user.html')
@@ -40,16 +49,18 @@ def newUser():
 
 @app.route('/user/<int:user_id>/edit/', methods=['GET', 'POST'])
 def editUser(user_id):
+
     try:
-        session.user
+        db.session.user
     except:
         return redirect(url_for('login'))
+
 
     editable = session.query(Formula).filter_by(id=user_id).one()
     if request.method == 'POST':
         editable.name = request.form['name']
-        session.add(editable)
-        session.commit()
+        db.session.add(editable)
+        db.session.commit()
         flash(editable.name + " was updated")
         return redirect(url_for('printUsers'))
     else:
@@ -60,15 +71,17 @@ def editUser(user_id):
 
 @app.route('/user/<int:user_id>/delete/', methods=['GET', 'POST'])
 def deleteUser(user_id):
+
     try:
-        session.user
+        db.session.user
     except:
         return redirect(url_for('login'))
 
+
     deletable = session.query(Formula).filter_by(id=user_id).one()
     if request.method == 'POST':
-        session.delete(deletable)
-        session.commit()
+        db.session.delete(deletable)
+        db.session.commit()
         flash(deletable.name + " was deleted")
         return redirect(url_for('printFormulas'))
     else:

@@ -3,15 +3,16 @@ Routes and views for the flask application.
 """
 
 from flask import render_template, redirect, url_for
-from flask_server import session
 from project import app
+from flask_server import db
 
 
 @app.route('/')
 @app.route('/home')
 def home():
+
     try:
-        session.user
+        db.session.user
     except:
         return redirect(url_for('login'))
 
