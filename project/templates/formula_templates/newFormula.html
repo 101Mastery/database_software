@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Create a New Formula</h1>
+    <form action="{{ url_for('newFormula')}}" method = 'post'>
+
+        <p>Name: </p>
+        <input type = 'text' size='30' name='name'>
+
+        </br>
+
+        <p>Description: </p>
+        <input type = 'text' size='30' name="description">
+
+        </br>
+        </br>
+        <input type = 'submit' value='Create'>
+        <a href = '{{url_for('printFormulas', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+
+    </form>
+
+</body>
+</html>

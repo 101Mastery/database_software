@@ -1,0 +1,22 @@
+
+<html>
+<body>
+<h1>Edit Formula</h1>
+<form action= "{{url_for('editFormula', formula_id=formula_id)}}" method = 'POST'>
+
+    <p>Name: {{formulaName}}</p>
+
+    <p>Previous Description: {{formulaDescription}}</p>
+
+    <p>New Description: </p>
+    <input type = 'text' size='30' name="description">
+
+    </br>
+    </br>
+    <input type = 'submit' value='Edit'>
+    <a href = '{{url_for('printFormulas', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+
+</form>
+
+</body>
+</html>

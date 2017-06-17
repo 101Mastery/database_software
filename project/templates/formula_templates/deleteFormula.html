@@ -1,0 +1,13 @@
+
+<html>
+<body>
+<h1>Are You Sure You Want To Delete {{formulaName}}</h1>
+<form action= "{{url_for('deleteFormula', formula_id=formula_id)}}" method = 'POST'>
+
+    <input type = 'submit' value='YES'>
+    <a href = '{{url_for('printFormulas', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+
+</form>
+
+</body>
+</html>
