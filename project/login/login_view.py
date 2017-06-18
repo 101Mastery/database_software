@@ -1,9 +1,9 @@
-from flask import render_template, request, redirect, url_for,flash
+from flask import render_template, request, redirect, url_for, flash, session
 from project import app
 from project.login.login_functions import is_valid
-from project.database.make_database import User
-from flask_server import session
+from manage import User
 import logging
+from flask_server import db
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -21,8 +21,8 @@ def login():
 
         if res:
             logging.warn(name)
-            user = session.query(User).filter_by(id=request.form['code']).one()
-            session.user = user
+            user = User.query.filter_by(id=request.form['code']).one()
+            db.session.user = user
 
             return redirect(url_for('home'))
 

@@ -1,12 +1,12 @@
-from project.database.make_database import User
-from flask_server import session
-from flask import redirect, url_for
+from manage import User
+from flask import redirect, url_for, session
 import logging
+from flask_server import db
 
 
 def is_valid(name, login):
 
-    user = session.query(User).filter_by(name=name).one()
+    user = User.query.filter_by(name=name).one()
 
     if user:
         if user.id is int(login):
