@@ -2,11 +2,9 @@
 Routes and views for the flask application.
 """
 from datetime import datetime
-from flask import render_template, request, redirect, flash, url_for, session
+from flask import render_template, request, redirect, flash, url_for
 from project import app
 from manage import Formula, User
-from project.login.login_functions import login_needed
-import logging
 from flask_server import db
 
 
