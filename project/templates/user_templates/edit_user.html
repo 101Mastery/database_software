@@ -1,0 +1,22 @@
+
+<html>
+<body>
+<h1>Edit Formula</h1>
+<form action= "{{url_for('editUser', user_id=user_id)}}" method = 'POST'>
+
+    <p>Name: {{formulaName}}</p>
+
+    <p>Previous Title: {{userTitle}}</p>
+
+    <p>New Name </p>
+    <input type = 'text' size='30' name="name">
+
+    </br>
+    </br>
+    <input type = 'submit' value='Edit'>
+    <a href = '{{url_for('printUsers', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+
+</form>
+
+</body>
+</html>
