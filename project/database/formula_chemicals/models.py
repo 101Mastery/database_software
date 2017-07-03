@@ -106,6 +106,8 @@ class Instructions(db.Model):
 
     key = db.Column(db.String(80), default=uuid4())
 
+    id = db.Column(db.Integer, primary_key=True)
+
 
 class Attachment(db.Model):
     __tablename__ = 'ingredient'
