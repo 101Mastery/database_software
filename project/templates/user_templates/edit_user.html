@@ -1,22 +1,53 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
-<h1>Edit Formula</h1>
-<form action= "{{url_for('editUser', user_id=user_id)}}" method = 'POST'>
-
-    <p>Name: {{formulaName}}</p>
-
-    <p>Previous Title: {{userTitle}}</p>
-
-    <p>New Name </p>
-    <input type = 'text' size='30' name="name">
-
+    <p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
     </br>
     </br>
-    <input type = 'submit' value='Edit'>
-    <a href = '{{url_for('printUsers', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+    </br>
+    <h1>Edit User</h1>
+    <form action="{{ url_for('editUser', user_id=user_id)}}" method = 'post'>
 
-</form>
+        <p>Name: </p>
+        <input type = 'text' size='30' name='name' value="{{editable.name}}">
+
+        </br>
+
+        <p>User Name: </p>
+        <input type = 'text' size='30' name='user_name' value="{{editable.user_name}}">
+
+        </br>
+
+        <p>Password: </p>
+        <input type = 'password' size='30' name='password' value="{{editable.password}}">
+
+        </br>
+
+        <p>Title: </p>
+        <input value="{{editable.title}}" list="titles" name="title" />
+<datalist id="titles">
+    <option value="Manager">
+    <option value="Technician">
+    <option value="Tester">
+    <option value="Quality Assurance">
+</datalist>
+
+        </br>
+        </br>
+
+
+
+        </br>
+        </br>
+        <input type = 'submit' value='Create'>
+        <a href = "{{url_for('printUsers')}}"> <input type = 'button' value='Cancel'></a>
+
+    </form>
 
 </body>
 </html>

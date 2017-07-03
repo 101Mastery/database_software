@@ -1,11 +1,16 @@
 
 <html>
 <body>
+<p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
 <h1>Are You Sure You Want To Delete {{userName}}</h1>
 <form action= "{{url_for('deleteUser', user_id=user_id)}}" method = 'POST'>
 
     <input type = 'submit' value='YES'>
-    <a href = '{{url_for('printUsers', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+    <a href = '{{url_for('printUsers')}}'> <input type = 'button' value='Cancel'></a>
 
 </form>
 

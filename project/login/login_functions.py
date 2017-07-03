@@ -1,16 +1,15 @@
-from manage import User
-from flask import redirect, url_for, session
+from functools import wraps
+from flask import request, redirect, url_for
+from project.database.users.models import User
 import logging
-from flask_server import db
+
 
 
 def is_valid(name, login):
-
-    user = User.query.filter_by(name=name).one()
+    user = User.query.filter_by(user_name=name).one()
 
     if user:
-        if user.id is int(login):
-            logging.warn("login succussful")
+        if user.password == login:
             return True
         else:
             logging.warn("id does not equal code")
@@ -20,11 +19,9 @@ def is_valid(name, login):
         return False
 
 
-def login_needed():
+def req_login():
     try:
-        if session.user:
-            return
-        else:
-            return redirect(url_for('login'))
+        user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
+        return
     except:
         return redirect(url_for('login'))

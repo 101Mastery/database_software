@@ -1,6 +1,11 @@
 
 <html>
 <body>
+<p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
 <h1>Are You Sure You Want To Delete {{formulaName}}</h1>
 <form action= "{{url_for('deleteFormula', formula_id=formula_id)}}" method = 'POST'>
 

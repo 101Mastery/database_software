@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
     <h1> Home</h1>
@@ -18,8 +18,11 @@
     {% endif %}
     {% endwith %}
 
+    <p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
     </br>
-
+    </br>
+    </br>
     <a href='{{url_for('printFormulas')}}'>Formulas</a>
 
     </br>

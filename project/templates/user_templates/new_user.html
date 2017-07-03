@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+    <p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
     <h1>Create a New User</h1>
     <form action="{{ url_for('newUser')}}" method = 'post'>
 
@@ -13,17 +18,26 @@
 
         </br>
 
+        <p>User Name: </p>
+        <input type = 'text' size='30' name='user_name'>
+
+        </br>
+
+        <p>Password: </p>
+        <input type = 'password' size='30' name='password'>
+
+        </br>
+
         <p>Title: </p>
-        <input list="titles" name="title" /></label>
+        <input list="titles" name="title"/>
 <datalist id="titles">
-  <option value="Tester">
+    <option value="Manager">
+    <option value="Technician">
+    <option value="Tester">
+    <option value="Quality Assurance">
 </datalist>
 
         </br>
-        </br>
-
-        <input type="checkbox" name="creation_user" value=True> give user, user creation/editing ability<br>
-
         </br>
 
 
@@ -31,7 +45,7 @@
         </br>
         </br>
         <input type = 'submit' value='Create'>
-        <a href = '{{url_for('printUsers', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+        <a href = '{{url_for('printUsers')}}'> <input type = 'button' value='Cancel'></a>
 
     </form>
 
