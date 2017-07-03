@@ -1,5 +1,7 @@
 from flask_server import db
 from datetime import datetime
+from uuid import uuid4
+
 
 class Formula(db.Model):
     __tablename__ = 'formula'
