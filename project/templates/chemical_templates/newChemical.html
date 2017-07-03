@@ -12,7 +12,7 @@
     </br>
     </br>
     <h1>Create a New Chemical</h1>
-    <form action="{{ url_for('newFormula')}}" method = 'post'>
+    <form action="{{ url_for('newChemical')}}" method = 'post'>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
         </br>
 
         <p>cas Number: </p>
-        <input type = 'text' size='30' name="description">
+        <input type = 'text' size='30' name="cas">
 
         <p>Quality Insurance: </p>
 
@@ -54,12 +54,7 @@ $(document).ready(function() {
         </br>
         </br>
 
-        Time Required: <input type="text" name="time_required">
-
-        </br>
-        </br>
-
-        Beyond Use: <input type="text" name="time_required">
+        Beyond Use: <input type="text" name="beyond_use">
 
         </br>
         </br>
