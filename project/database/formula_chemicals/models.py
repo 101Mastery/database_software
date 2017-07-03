@@ -89,6 +89,8 @@ class Ingredient(db.Model):
     __tablename__ = 'ingredient'
     __table_args__ = {'extend_existing': True}
 
+    id = db.Column(db.Integer, primary_key=True)
+
     formula_key = db.Column(db.String(80))
 
     ingredient_key = db.Column(db.String(80))
