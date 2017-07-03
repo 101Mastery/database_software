@@ -115,6 +115,8 @@ class Attachment(db.Model):
 
     name = db.Column(db.String(80))
 
+    id = db.Column(db.Integer, primary_key=True)
+
     product_key = db.Column(db.String(80))
 
     product_model = db.Column(db.Integer)
