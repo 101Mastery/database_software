@@ -18,7 +18,7 @@ def printFormulas():
         return redirect(url_for('login'))
 
     formulas = Formula.query.all()
-    return render_template('layout.html', formulas=formulas, user=user)
+    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user)
 
 
 @app.route('/formula/new', methods=['GET', 'POST'])
@@ -78,6 +78,7 @@ def deleteFormula(formula_id):
         return redirect(url_for('printFormulas', user=user))
     else:
         return render_template('formula_templates/deleteFormula.html', formula_id=formula_id, formulaName=deletable.name, user=user)
+
 
 @app.route('/formula/<int:formula_id>/view/', methods=['GET'])
 def viewFormula(formula_id):

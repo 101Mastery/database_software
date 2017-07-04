@@ -73,7 +73,7 @@ def editChemical(chemical_id):
         flash(editable.name + " was updated")
         return redirect(url_for('printChemicals', user=user))
     else:
-        return render_template('chemicals_templates/editChemical.html', user=user, chemical_id=chemical_id, chemicalName=editable.name, formulaDescription=editable.description)
+        return render_template('chemical_templates/editChemical.html', user=user, chemical_id=chemical_id, chemical=editable)
 
 # Task 3: Create a route for deleteMenuItem function here
 

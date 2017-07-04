@@ -6,5 +6,81 @@
 </head>
 <body>
 
+    <p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
+    <h1>Create a New Chemical</h1>
+    <form action="{{ url_for('editChemical', chemical_id=chemical_id)}}" method = 'post'>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+        <script type='text/javascript'>
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".upload"); //Fields wrapper
+    var add_button      = $(".add_uploads_button"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div>Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+
+        <p>Name: {{chemical.name}}</p>
+
+        </br>
+
+        <p>cas Number: {{chemical.cas}}</p>
+        <input type = 'text' size='30' name="cas">
+
+        <p>Quality Insurance: </p>
+
+        <div class="upload">
+            <div>Select a file: <input type="file" name="pdf"><input type="button" class="add_uploads_button" value="+"></div>
+        </div>
+
+        </br>
+        </br>
+
+        Beyond Use: <input type="text" name="beyond_use" value="{{chemical.beyond_use}}">
+
+        </br>
+        </br>
+
+        Storage:
+
+        <input type="radio" name="storage" value="refrigerate" > Refrigerate
+        <input type="radio" name="storage" value="freeze"> Freeze
+        <input type="radio" name="storage" value="deep_freeze"> Deep Freeze
+        </br>
+        </br>
+        <p>Hazards: </p>
+        <input type="checkbox" name="explosive" value="true"> Explosive<br>
+        <input type="checkbox" name="flammable" value="true">Flammable<br>
+        <input type="checkbox" name="oxidizer" value="true">Oxidizer<br>
+        <input type="checkbox" name="corrosive" value="true"> Corrosive<br>
+        <input type="checkbox" name="toxic" value="true">Toxic<br>
+
+        </br>
+        </br>
+
+        <input type = 'submit' value='Create'>
+        <a href = '{{url_for('printChemicals')}}'> <input type = 'button' value='Cancel'></a>
+
+
+
+    </form>
+
 </body>
 </html>
