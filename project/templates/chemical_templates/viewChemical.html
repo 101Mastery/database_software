@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
+<p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
+<h1>{{chemical.name}}</h1>
+<form action= "{{url_for('viewChemical', chemical_id=chemical_id)}}" method = 'POST'>
+
+    <p>cas: {{chemical.cas}}</p>
+
+    Hazards: <br>
+    <p>Explosive: {{chemical.explosive}}</p>
+    <p>Flammable: {{chemical.flammable}}</p>
+    <p>Oxidizer: {{chemical.oxidizer}}</p>
+    <p>Corrosive: {{chemical.corrosive}}</p>
+    <p>Toxic: {{chemical.toxic}}</p>
+
+    </br>
+    </br>
+    <a href = '{{url_for('printChemicals')}}'> <input type = 'button' value='Back'></a>
+
+</form>
 
 </body>
 </html>
