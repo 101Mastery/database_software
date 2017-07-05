@@ -11,7 +11,7 @@
     </br>
     </br>
     </br>
-    <h1>Create a New Chemical</h1>
+    <h1>Edit Chemical</h1>
     <form action="{{ url_for('editChemical', chemical_id=chemical_id)}}" method = 'post'>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -41,8 +41,8 @@ $(document).ready(function() {
 
         </br>
 
-        <p>cas Number: {{chemical.cas}}</p>
-        <input type = 'text' size='30' name="cas">
+        <p>cas Number:</p>
+        <input type = 'text' size='30' name="cas" value="{{chemical.cas}}">
 
         <p>Quality Insurance: </p>
 
@@ -60,22 +60,64 @@ $(document).ready(function() {
 
         Storage:
 
+        {% if chemical.storage == 'refrigerate' %}
+        <input type="radio" name="storage" value="refrigerate" checked> Refrigerate
+        {% else %}
         <input type="radio" name="storage" value="refrigerate" > Refrigerate
+        {% endif %}
+
+        {% if chemical.storage == 'freeze' %}
+        <input type="radio" name="storage" value="freeze" checked> Freeze
+        {% else %}
         <input type="radio" name="storage" value="freeze"> Freeze
+        {% endif %}
+
+        {% if chemical.storage == 'deep_freeze' %}
+        <input type="radio" name="storage" value="deep_freeze" checked> Deep Freeze
+        {% else %}
         <input type="radio" name="storage" value="deep_freeze"> Deep Freeze
+        {% endif %}
+
+
         </br>
         </br>
-        <p>Hazards: </p>
-        <input type="checkbox" name="explosive" value="true"> Explosive<br>
+
+
+        <p>Hazards:</p>
+        {% if chemical.explosive %}
+        <input type="checkbox" name="explosive" value="true" checked> Explosive<br>
+        {% else %}
+        <input type="checkbox" name="explosive" value="true"> Explosive checked<br>
+        {% endif %}
+
+        {% if chemical.flammable %}
+        <input type="checkbox" name="flammable" value="true" checked>Flammable<br>
+        {% else %}
         <input type="checkbox" name="flammable" value="true">Flammable<br>
+        {% endif %}
+
+        {% if chemical.oxidizer %}
+        <input type="checkbox" name="oxidizer" value="true" checked>Oxidizer<br>
+        {% else %}
         <input type="checkbox" name="oxidizer" value="true">Oxidizer<br>
+        {% endif %}
+
+        {% if chemical.corrosive %}
+        <input type="checkbox" name="corrosive" value="true" checked> Corrosive<br>
+        {% else %}
         <input type="checkbox" name="corrosive" value="true"> Corrosive<br>
+        {% endif %}
+
+        {% if chemical.toxic %}
+        <input type="checkbox" name="toxic" value="true" checked>Toxic<br>
+        {% else %}
         <input type="checkbox" name="toxic" value="true">Toxic<br>
+        {% endif %}
 
         </br>
         </br>
 
-        <input type = 'submit' value='Create'>
+        <input type = 'submit' value='Update'>
         <a href = '{{url_for('printChemicals')}}'> <input type = 'button' value='Cancel'></a>
 
 

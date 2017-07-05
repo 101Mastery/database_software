@@ -32,20 +32,35 @@ def newChemical():
     if request.method == 'POST':
         new = Chemical(name=request.form['name'], user_key=user.key, cas=request.form['cas'], beyond_use=request.form['beyond_use'], storage=request.form['storage'])
 
-        if str(request.form['explosive']) is 'true':
-            new.explosive = True
+        try:
+            if str(request.form['explosive']) == 'true':
+                new.explosive = True
+        except:
+            new.explosive = False
 
-        if str(request.form['flammable']) is 'true':
-            new.flammable = True
+        try:
+            if str(request.form['flammable']) == 'true':
+                new.flammable = True
+        except:
+            new.flammable = False
 
-        if str(request.form['oxidizer']) is 'true':
-            new.oxidizer = True
+        try:
+            if str(request.form['oxidizer']) == 'true':
+                new.oxidizer = True
+        except:
+            new.flammable = False
 
-        if str(request.form['corrosive']) is 'true':
-            new.corrosive = True
+        try:
+            if str(request.form['corrosive']) == 'true':
+                new.corrosive = True
+        except:
+            new.corrosive = False
 
-        if str(request.form['toxic']) is 'true':
-            new.toxic = True
+        try:
+            if str(request.form['toxic']) == 'true':
+                new.toxic = True
+        except:
+            new.toxic = False
 
         db.session.add(new)
         db.session.commit()
@@ -67,7 +82,34 @@ def editChemical(chemical_id):
 
     editable = Chemical.query.filter_by(id=chemical_id).one()
     if request.method == 'POST':
-        editable.description = request.form['description']
+        editable.cas = request.form['cas']
+        editable.beyond_use = request.form['beyond_use']
+        editable.storage = request.form['storage']
+
+        try:
+            if str(request.form['flammable']) == 'true':
+                editable.flammable = True
+        except:
+            editable.flammable = False
+
+        try:
+            if str(request.form['oxidizer']) == 'true':
+                editable.oxidizer = True
+        except:
+            editable.oxidizer = False
+
+        try:
+            if str(request.form['corrosive']) == 'true':
+                editable.corrosive = True
+        except:
+            editable.corrosive = False
+
+        try:
+            if str(request.form['toxic']) == 'true':
+                editable.toxic = True
+        except:
+            editable.toxic = False
+
         db.session.add(editable)
         db.session.commit()
         flash(editable.name + " was updated")
@@ -106,4 +148,4 @@ def viewChemical(chemical_id):
 
     chemical = Chemical.query.filter_by(id=chemical_id).one()
 
-    return render_template('chemical_templates/view_chemical.html', chemical_id=chemical_id, chemical=chemical, user=user)
+    return render_template('chemical_templates/viewChemical.html', chemical_id=chemical_id, chemical=chemical, user=user)
