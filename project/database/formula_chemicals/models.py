@@ -13,8 +13,6 @@ class Formula(db.Model):
 
     key = db.Column(db.String(80), default=uuid4())
 
-    cas = db.Column(db.String(80))
-
     description = db.Column(db.String(250))
 
     user_key = db.Column(db.String(80))
@@ -28,8 +26,6 @@ class Formula(db.Model):
     time_rq_hr = db.Column(db.Integer)
 
     time_rq_min = db.Column(db.Integer)
-
-    time_rq_sec = db.Column(db.Integer)
 
     beyond_use = db.Column(db.Integer)
 

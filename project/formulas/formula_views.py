@@ -30,7 +30,47 @@ def newFormula():
         return redirect(url_for('login'))
 
     if request.method == 'POST':
-        new = Formula(name=request.form['name'], description=request.form['description'], instructions=request.form['instructions'], user_key=user.key)
+        new = Formula(
+            name=request.form['name'],
+            description=request.form['description'],
+            user_key=user.key,
+            prep=request.form['prep_instructions'],
+            time_rq_days=request.form['time_required_days'],
+            time_rq_hr=request.form['time_required_hr'],
+            time_rq_min=request.form['time_required_min'],
+            beyond_use=request.form['beyond_use'],
+            storage=request.form['storage'])
+
+        try:
+            if str(request.form['explosive']) == 'true':
+                new.explosive = True
+        except:
+            new.explosive = False
+
+        try:
+            if str(request.form['flammable']) == 'true':
+                new.flammable = True
+        except:
+            new.flammable = False
+
+        try:
+            if str(request.form['oxidizer']) == 'true':
+                new.oxidizer = True
+        except:
+            new.flammable = False
+
+        try:
+            if str(request.form['corrosive']) == 'true':
+                new.corrosive = True
+        except:
+            new.corrosive = False
+
+        try:
+            if str(request.form['toxic']) == 'true':
+                new.toxic = True
+        except:
+            new.toxic = False
+
         db.session.add(new)
         db.session.commit()
         flash(new.name + " was created ")
@@ -52,12 +92,49 @@ def editFormula(formula_id):
     editable = Formula.query.filter_by(id=formula_id).one()
     if request.method == 'POST':
         editable.description = request.form['description']
+        editable.prep = request.form['prep_instructions']
+        editable.time_rq_days = request.form['time_required_days']
+        editable.time_rq_hr = request.form['time_required_hr']
+        editable.time_rq_min = request.form['time_required_min']
+        editable.beyond_use = request.form['beyond_use']
+        editable.storage = request.form['storage']
+
+        try:
+            if str(request.form['explosive']) == 'true':
+                editable.explosive = True
+        except:
+            editable.explosive = False
+
+        try:
+            if str(request.form['flammable']) == 'true':
+                editable.flammable = True
+        except:
+            editable.flammable = False
+
+        try:
+            if str(request.form['oxidizer']) == 'true':
+                editable.oxidizer = True
+        except:
+            editable.oxidizer = False
+
+        try:
+            if str(request.form['corrosive']) == 'true':
+                editable.corrosive = True
+        except:
+            editable.corrosive = False
+
+        try:
+            if str(request.form['toxic']) == 'true':
+                editable.toxic = True
+        except:
+            editable.toxic = False
+
         db.session.add(editable)
         db.session.commit()
         flash(editable.name + " was updated")
         return redirect(url_for('printFormulas', user=user))
     else:
-        return render_template('formula_templates/editFormula.html', user=user, formula_id=formula_id, formulaName=editable.name, formulaDescription=editable.description)
+        return render_template('formula_templates/editFormula.html', formula=editable, user=user, formula_id=formula_id,)
 
 # Task 3: Create a route for deleteMenuItem function here
 

@@ -1,27 +1,144 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
-<p>user: {{user.name}}</p>
+
+    <p>user: {{user.name}}</p>
     <a href='{{url_for('logout')}}'>logout</a>
     </br>
     </br>
     </br>
-<h1>Edit Formula</h1>
-<form action= "{{url_for('editFormula', formula_id=formula_id)}}" method = 'POST'>
+    <h1>Edit Formula</h1>
+    <form action="{{ url_for('editFormula', formula_id=formula_id)}}" method = 'post'>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-    <p>Name: {{formulaName}}</p>
 
-    <p>Previous Description: {{formulaDescription}}</p>
+        <script type='text/javascript'>
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".upload"); //Fields wrapper
+    var add_button      = $(".add_uploads_button"); //Add button ID
 
-    <p>New Description: </p>
-    <input type = 'text' size='30' name="description">
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div>Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
 
-    </br>
-    </br>
-    <input type = 'submit' value='Update'>
-    <a href = '{{url_for('printFormulas', restaurant_id = restaurant_id)}}'> <input type = 'button' value='Cancel'></a>
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
 
-</form>
+        <p>Name: {{formula.name}}</p>
+
+        </br>
+
+        <p>Description: </p>
+        <input type = 'text' size='30' name="description" value="{{formula.description}}">
+
+        </br>
+
+        <p>Prep Instructions: </p>
+        </br>
+
+    <div><textarea name='prep_instructions'rows="4" cols="50">{{formula.prep}}</textarea></div>
+
+        <p>Quality Insurance: </p>
+
+        <div class="upload">
+            <div>Select a file: <input type="file" name="pdf"><input type="button" class="add_uploads_button" value="+"></div>
+        </div>
+
+        </br>
+        </br>
+
+        Time Required:<br><br>
+        Days:<input type="text" name="time_required_days" value="{{formula.time_rq_days}}">
+        Hours:<input type="text" name="time_required_hr" value="{{formula.time_rq_hr}}">
+        Minutes:<input type="text" name="time_required_min" value="{{formula.time_rq_min}}">
+
+        </br>
+        </br>
+        </br>
+
+        Beyond Use: <input type="text" name="beyond_use" value="{{formula.beyond_use}}">
+
+        </br>
+        </br>
+
+        Storage:
+
+        {% if formula.storage == 'refrigerate' %}
+        <input type="radio" name="storage" value="refrigerate" checked> Refrigerate
+        {% else %}
+        <input type="radio" name="storage" value="refrigerate" > Refrigerate
+        {% endif %}
+
+        {% if formula.storage == 'freeze' %}
+        <input type="radio" name="storage" value="freeze" checked> Freeze
+        {% else %}
+        <input type="radio" name="storage" value="freeze"> Freeze
+        {% endif %}
+
+        {% if formula.storage == 'deep_freeze' %}
+        <input type="radio" name="storage" value="deep_freeze" checked> Deep Freeze
+        {% else %}
+        <input type="radio" name="storage" value="deep_freeze"> Deep Freeze
+        {% endif %}
+
+
+        </br>
+        </br>
+
+
+        <p>Hazards:</p>
+        {% if formula.explosive %}
+        <input type="checkbox" name="explosive" value="true" checked> Explosive<br>
+        {% else %}
+        <input type="checkbox" name="explosive" value="true"> Explosive checked<br>
+        {% endif %}
+
+        {% if formula.flammable %}
+        <input type="checkbox" name="flammable" value="true" checked>Flammable<br>
+        {% else %}
+        <input type="checkbox" name="flammable" value="true">Flammable<br>
+        {% endif %}
+
+        {% if formula.oxidizer %}
+        <input type="checkbox" name="oxidizer" value="true" checked>Oxidizer<br>
+        {% else %}
+        <input type="checkbox" name="oxidizer" value="true">Oxidizer<br>
+        {% endif %}
+
+        {% if formula.corrosive %}
+        <input type="checkbox" name="corrosive" value="true" checked> Corrosive<br>
+        {% else %}
+        <input type="checkbox" name="corrosive" value="true"> Corrosive<br>
+        {% endif %}
+
+        {% if formula.toxic %}
+        <input type="checkbox" name="toxic" value="true" checked>Toxic<br>
+        {% else %}
+        <input type="checkbox" name="toxic" value="true">Toxic<br>
+        {% endif %}
+
+        </br>
+        </br>
+
+        <input type = 'submit' value='Update'>
+        <a href = '{{url_for('printFormulas')}}'> <input type = 'button' value='Cancel'></a>
+
+
+
+    </form>
 
 </body>
 </html>
