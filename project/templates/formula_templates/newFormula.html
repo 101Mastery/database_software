@@ -26,12 +26,20 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><textarea rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div><textarea class="step" rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a></div>'); //add input box
         }
+        $(".step").each(function( index ) {
+            $(this).attr("name","step_"+index)
+        })
+        $(".stepCount").attr("value",""+x)
     });
 
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
+        $(".step").each(function( index ) {
+            $(this).attr("name","step_"+index)
+        })
+        $(".stepCount").attr("value",""+x)
     })
 });
 </script>
@@ -77,8 +85,10 @@ $(document).ready(function() {
         </br>
         <div class="steps">
     <input type="button" class="add_steps_button" value="Add More Steps">
-    <div><textarea name='instructions'rows="4" cols="50"></textarea></div>
+    <div><textarea class="step" name='step_0'rows="4" cols="50"></textarea></div>
 </div>
+        <input type="hidden" name="stepCount" value="1" class="stepCount">
+
         <p>Ingredients: </p>
         Search: <input type="search" name="ingredient_search">
 

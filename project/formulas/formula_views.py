@@ -7,6 +7,7 @@ from project import app
 from project.database.formula_chemicals.models import Formula
 from project.database.users.models import User
 from flask_server import db
+from project.formulas.functions.steps import newSteps
 
 
 @app.route('/formula')
@@ -41,6 +42,8 @@ def newFormula():
             beyond_use=request.form['beyond_use'],
             storage=request.form['storage'])
 
+        x = request.form['stepCount']
+
         try:
             if str(request.form['explosive']) == 'true':
                 new.explosive = True
@@ -73,6 +76,15 @@ def newFormula():
 
         db.session.add(new)
         db.session.commit()
+
+        stepArray=[]
+
+        for i in range(0, int(x)):
+            name = 'step_'+str(i)
+            stepArray.append(request.form[name])
+
+        newSteps(new.key, stepArray)
+
         flash(new.name + " was created ")
         return redirect(url_for('printFormulas', user=user))
     else:

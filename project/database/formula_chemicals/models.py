@@ -94,13 +94,15 @@ class Ingredient(db.Model):
     step_key = db.Column(db.String(80))
 
 
-class Instructions(db.Model):
+class Instruction(db.Model):
     __tablename__ = 'ingredient'
     __table_args__ = {'extend_existing': True}
 
     formula_key = db.Column(db.String(80))
 
     step_number = db.Column(db.Integer)
+
+    step = db.Column(db.String(1000))
 
     key = db.Column(db.String(80), default=uuid4())
 
