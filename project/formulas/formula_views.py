@@ -4,7 +4,7 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, request, redirect, flash, url_for
 from project import app
-from project.database.formula_chemicals.models import Formula
+from project.database.formula_chemicals.models import Formula, Instruction
 from project.database.users.models import User
 from flask_server import db
 from project.formulas.functions.steps import newSteps
@@ -180,3 +180,4 @@ def viewFormula(formula_id):
     formula = Formula.query.filter_by(id=formula_id).one()
 
     return render_template('formula_templates/view_formula.html', formula_id=formula_id, formula=formula, user=user)
+

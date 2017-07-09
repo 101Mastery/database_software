@@ -26,7 +26,8 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><textarea class="step" rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div><textarea class="step" rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a><p>Ingredients: </p>Search: <input type="text"><br><br></div>'); //add input box
+
         }
         $(".step").each(function( index ) {
             $(this).attr("name","step_"+index)
@@ -55,7 +56,13 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div>Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div>
+            Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a>
+            <br>
+            <p>Ingredients: </p>
+        Search: <input type="search" name="ingredient_search">
+            <br>
+            </div>'); //add input box
         }
     });
 
@@ -86,11 +93,13 @@ $(document).ready(function() {
         <div class="steps">
     <input type="button" class="add_steps_button" value="Add More Steps">
     <div><textarea class="step" name='step_0'rows="4" cols="50"></textarea></div>
+
+            <p>Ingredients: </p>
+        Search: <input type="text">
+            <br>
+            <br>
 </div>
         <input type="hidden" name="stepCount" value="1" class="stepCount">
-
-        <p>Ingredients: </p>
-        Search: <input type="search" name="ingredient_search">
 
         <p>Quality Insurance: </p>
 

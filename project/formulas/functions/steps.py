@@ -4,12 +4,12 @@ import logging
 
 def newSteps(f_key, step_array):
 
-    for i in step_array:
+    for i in range(0, len(step_array)):
         logging.warn(i)
         new = Instruction(
             formula_key=f_key,
             step_number=i,
-            step=step_array[int(i)]
+            step=step_array[i]
         )
 
         logging.warn(new)
