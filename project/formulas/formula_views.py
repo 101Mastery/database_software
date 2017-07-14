@@ -4,7 +4,7 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, request, redirect, flash, url_for
 from project import app
-from project.database.formula_chemicals.models import Formula, Instruction
+from project.database.formula_chemicals.models import Formula, Chemical
 from project.database.users.models import User
 from flask_server import db
 from project.formulas.functions.steps import newSteps
@@ -88,7 +88,8 @@ def newFormula():
         flash(new.name + " was created ")
         return redirect(url_for('printFormulas', user=user))
     else:
-        return render_template('formula_templates/newFormula.html', user=user)
+        chemicals = Chemical.query.all()
+        return render_template('formula_templates/newFormula.html', user=user, chemicals=chemicals)
 
 # Task 2: Create route for editMenuItem function here
 

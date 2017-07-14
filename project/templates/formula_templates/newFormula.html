@@ -20,19 +20,31 @@ $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
     var wrapper         = $(".steps"); //Fields wrapper
     var add_button      = $(".add_steps_button"); //Add button ID
+    var ingredient_button      = $(".ingredient_button"); //Add button ID
 
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><textarea class="step" rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a><p>Ingredients: </p>Search: <input type="text"><br><br></div>'); //add input box
+            $(wrapper).append('<div class="stepDiv" ><textarea class="step" rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a><br><div> <p>Ingredients: </p><input type="button" class="ingredient_button"  value="Add new Ingredient"><input type="hidden" value="0" class="ingredientCount"></div><br>'); //add input box
 
         }
+
         $(".step").each(function( index ) {
             $(this).attr("name","step_"+index)
         })
-        $(".stepCount").attr("value",""+x)
+
+        $(".ingredientCount").each(function( index ) {
+            $(this).attr("name","ingredientCount_"+index)
+        })
+
+        $(".stepDiv").each(function( index ) {
+            $(this).attr("id","step_"+index)
+        })
+
+        count = parseInt($(".stepCount").val())+1
+        $(".stepCount").attr("value",count)
     });
 
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
@@ -40,7 +52,80 @@ $(document).ready(function() {
         $(".step").each(function( index ) {
             $(this).attr("name","step_"+index)
         })
-        $(".stepCount").attr("value",""+x)
+
+        $(".ingredient_button").each(function( index ) {
+            $(this).attr("id","step"+index)
+        })
+
+        $(".ingredientCount").each(function( index ) {
+            $(this).attr("name","ingredientCount_"+index)
+        })
+
+        $(".ingredient").each(function( index ) {
+            $(this).attr("id",index)
+        })
+
+        count = parseInt($(".stepCount").val())-1
+        $(".stepCount").attr("value",count)
+
+         $(".stepDiv").each(function( index ) {
+            $(this).attr("id","step_"+index)
+        })
+
+        i=0
+        previousDiv=0
+        $(".actualIngredient").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i)
+            previousDiv = divId
+        })
+    })
+
+    $(wrapper).on("click",".ingredient_button", function() {
+
+        $($(this).parent()).append('<div class="ingredient_searches"><br><input type="button" class="searchButton" value="Search"> <input type="text" class="actualIngredient" value="please enter ingredient"> <a href="#" class="remove_field_ingredient">Remove</a><br><br></div>'); //add input box
+
+        i=0
+        previousDiv=0
+        $(".actualIngredient").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i)
+            previousDiv = divId
+            i=i+1
+        })
+
+        count = parseInt($(this).nextAll('.ingredientCount').val())+1
+        $(this).nextAll('.ingredientCount').attr("value",count)
+
+    });
+
+    $(wrapper).on("click",".remove_field_ingredient", function(e){ //user click on remove text
+        e.preventDefault();
+
+        i=0
+        previousDiv=0
+        $(".actualIngredient").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i)
+            previousDiv = divId
+        })
+
+        count = parseInt($(this).parent().prevAll('.ingredientCount').val())-1
+        $(this).parent().prevAll('.ingredientCount').attr("value",count)
+
+        $(this).parent('div').remove();
     })
 });
 </script>
@@ -56,13 +141,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div>
-            Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a>
-            <br>
-            <p>Ingredients: </p>
-        Search: <input type="search" name="ingredient_search">
-            <br>
-            </div>'); //add input box
+            $(wrapper).append('<div><br>Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a><br>'); //add input box
         }
     });
 
@@ -71,6 +150,43 @@ $(document).ready(function() {
     })
 });
 </script>
+
+        <script type='text/javascript'>
+$(document).ready(function() {
+
+    var wrapper = $(".steps"); //Fields wrapper
+
+    $(wrapper).on("click",".searchButton", function(e){ //user click on remove text
+        e.preventDefault();
+
+        box=$(this).next()
+        chemical = box.val()
+        found = 'false'
+
+        $(".chemical").each(function( index ) {
+            check= $(this).val()
+
+            if (check===chemical){
+                found = 'true'
+                box.css('background-color', 'green');
+            }
+
+        })
+
+        if (found === 'false'){
+           box.css('background-color', 'red');
+        }
+
+    })
+});
+</script>
+
+        {% for i in chemicals %}
+
+    <input type="text" value="{{i.name}}" class="chemical">
+
+    {% endfor %}
+
 
         <p>Name: </p>
         <input type = 'text' size='30' name='name'>
@@ -91,13 +207,17 @@ $(document).ready(function() {
         <p>Instructions: </p>
         </br>
         <div class="steps">
+    <div class="stepDiv" id="step_0">
     <input type="button" class="add_steps_button" value="Add More Steps">
     <div><textarea class="step" name='step_0'rows="4" cols="50"></textarea></div>
 
             <p>Ingredients: </p>
-        Search: <input type="text">
+            <input type="button" class="ingredient_button"  value="Add new Ingredient">
+            <input type="hidden" name="ingredientCount_0" value="0" class="ingredientCount">
             <br>
             <br>
+
+        </div>
 </div>
         <input type="hidden" name="stepCount" value="1" class="stepCount">
 
