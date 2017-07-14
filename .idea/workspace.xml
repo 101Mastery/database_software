@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="517463a7-26ab-4f71-a2b0-f9c732af542c" name="Default" comment="added a createChemical method">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/formulas/formula_views.py" afterPath="$PROJECT_DIR$/project/formulas/formula_views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/templates/formula_templates/newFormula.html" afterPath="$PROJECT_DIR$/project/templates/formula_templates/newFormula.html" />
-    </list>
+    <list default="true" id="517463a7-26ab-4f71-a2b0-f9c732af542c" name="Default" comment="added a createChemical method" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +75,7 @@
       <file leaf-file-name="newFormula.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/newFormula.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="264">
               <caret line="125" column="72" lean-forward="true" selection-start-line="125" selection-start-column="72" selection-end-line="125" selection-end-column="72" />
               <folding />
             </state>
@@ -917,7 +914,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/newFormula.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="264">
           <caret line="125" column="72" lean-forward="true" selection-start-line="125" selection-start-column="72" selection-end-line="125" selection-end-column="72" />
           <folding />
         </state>
