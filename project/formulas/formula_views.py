@@ -4,10 +4,11 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, request, redirect, flash, url_for
 from project import app
-from project.database.formula_chemicals.models import Formula, Chemical
+from project.database.formula_chemicals.models import Formula, Chemical, Ingredient, Instruction
 from project.database.users.models import User
 from flask_server import db
-from project.formulas.functions.steps import newSteps
+from project.formulas.functions.steps import new_steps
+import uuid
 
 
 @app.route('/formula')
@@ -19,7 +20,8 @@ def printFormulas():
         return redirect(url_for('login'))
 
     formulas = Formula.query.all()
-    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user)
+    ingredients = Ingredient.query.all()
+    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user, ingredients=ingredients)
 
 
 @app.route('/formula/new', methods=['GET', 'POST'])
@@ -40,7 +42,8 @@ def newFormula():
             time_rq_hr=request.form['time_required_hr'],
             time_rq_min=request.form['time_required_min'],
             beyond_use=request.form['beyond_use'],
-            storage=request.form['storage'])
+            storage=request.form['storage'],
+            key=uuid.uuid4())
 
         x = request.form['stepCount']
 
@@ -78,12 +81,41 @@ def newFormula():
         db.session.commit()
 
         stepArray=[]
+        ingredientCounts=[]
+        ingredients=[]
 
         for i in range(0, int(x)):
+            count='ingredientCount_'+str(i)
+            ingredientCounts.append(request.form[count])
             name = 'step_'+str(i)
             stepArray.append(request.form[name])
 
-        newSteps(new.key, stepArray)
+            for n in range(0, int(ingredientCounts[i])):
+                ingredientSearch='step_'+str(i)+'_ingredient_'+str(n)
+                ingredient = str(request.form[ingredientSearch])
+                chemicals = Chemical.query.all()
+
+                for t in chemicals:
+                    if t.name == ingredient:
+                        chemical = t
+                        break
+
+                ingredients.append(chemical.key)
+
+        new_steps(new.key, stepArray, ingredients, ingredientCounts)
+
+        find_scrap = Ingredient.query.filter_by(formula_key=new.key)
+        scrap = []
+
+        for i in find_scrap:
+            working_step = i.step_key
+            working_ing = i.ingredient_key
+            if working_step == None and working_ing == None:
+                scrap.append(i)
+
+        for x in scrap:
+            db.session.delete(x)
+            db.session.commit()
 
         flash(new.name + " was created ")
         return redirect(url_for('printFormulas', user=user))
@@ -161,9 +193,17 @@ def deleteFormula(formula_id):
         return redirect(url_for('login'))
 
     deletable = Formula.query.filter_by(id=formula_id).one()
+    steps = Instruction.query.filter_by(formula_key=deletable.key)
+    ingredients = Ingredient.query.filter_by(formula_key=deletable.key)
     if request.method == 'POST':
         db.session.delete(deletable)
         db.session.commit()
+        for i in steps:
+            db.session.delete(i)
+            db.session.commit()
+        for n in ingredients:
+            db.session.delete(n)
+            db.session.commit()
         flash(deletable.name + " was deleted")
         return redirect(url_for('printFormulas', user=user))
     else:

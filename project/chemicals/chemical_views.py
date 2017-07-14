@@ -87,6 +87,12 @@ def editChemical(chemical_id):
         editable.storage = request.form['storage']
 
         try:
+            if str(request.form['explosive']) == 'true':
+                editable.explosive= True
+        except:
+            editable.explosive = False
+
+        try:
             if str(request.form['flammable']) == 'true':
                 editable.flammable = True
         except:

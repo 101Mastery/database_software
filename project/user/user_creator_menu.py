@@ -6,6 +6,7 @@ from flask import render_template, request, redirect, flash, url_for
 from project import app
 from project.database.users.models import User
 from flask_server import db
+import uuid
 
 
 @app.route('/user')
@@ -29,7 +30,11 @@ def newUser():
 
     if request.method == 'POST':
 
-        new = User(name=request.form['name'], title=request.form['title'], user_name=request.form['user_name'], password=request.form['password'],)
+        new = User(name=request.form['name'],
+                   title=request.form['title'],
+                   user_name=request.form['user_name'],
+                   password=request.form['password'],
+                   key=uuid.uuid4())
 
         db.session.add(new)
         db.session.commit()

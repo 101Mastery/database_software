@@ -1,19 +1,41 @@
-from project.database.formula_chemicals.models import Instruction
+from project.database.formula_chemicals.models import Instruction, Chemical, Ingredient
 from flask_server import db
+import uuid
 import logging
 
-def newSteps(f_key, step_array):
 
+def new_ingredient(f_key, step_key, chemical_key):
+
+    new = Ingredient(
+        formula_key=f_key,
+        step_key=step_key,
+        ingredient_key=chemical_key
+    )
+
+    db.session.add(new)
+    db.session.commit()
+
+    return
+
+
+def new_steps(f_key, step_array, ingredients, ingredient_count_array):
+
+    x=0
     for i in range(0, len(step_array)):
-        logging.warn(i)
         new = Instruction(
             formula_key=f_key,
             step_number=i,
-            step=step_array[i]
+            step=step_array[i],
+            key=uuid.uuid4()
         )
 
-        logging.warn(new)
         db.session.add(new)
         db.session.commit()
+        logging.warn(new.key)
+
+        for n in range(x, int(ingredient_count_array[i])+x):
+            chemical = ingredients[n]
+            new_ingredient(f_key, new.key, chemical)
+            x=x+1
 
     return
