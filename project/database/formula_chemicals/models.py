@@ -51,6 +51,8 @@ class Formula(db.Model):
 
     d_size_unit = db.Column(db.String(10))
 
+    dose_form = db.Column(db.String(50))
+
     def get_key(self):
         return self.key
 
