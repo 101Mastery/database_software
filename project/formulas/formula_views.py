@@ -43,6 +43,11 @@ def newFormula():
             time_rq_min=request.form['time_required_min'],
             beyond_use=request.form['beyond_use'],
             storage=request.form['storage'],
+            formula_yield=request.form['formula_yield'],
+            f_yield_unit=request.form['formula_yield_unit'],
+            dose_size=request.form['dose_size'],
+            d_size_unit=request.form['dose_size_unit'],
+            dose_form=request.form['form'],
             key=uuid.uuid4())
 
         x = request.form['stepCount']
@@ -83,6 +88,8 @@ def newFormula():
         stepArray=[]
         ingredientCounts=[]
         ingredients=[]
+        amounts=[]
+        units=[]
 
         for i in range(0, int(x)):
             count='ingredientCount_'+str(i)
@@ -92,6 +99,8 @@ def newFormula():
 
             for n in range(0, int(ingredientCounts[i])):
                 ingredientSearch='step_'+str(i)+'_ingredient_'+str(n)
+                amount = ingredientSearch+"_amount"
+                unit = ingredientSearch+"_unit"
                 ingredient = str(request.form[ingredientSearch])
                 chemicals = Chemical.query.all()
 
@@ -101,8 +110,10 @@ def newFormula():
                         break
 
                 ingredients.append(chemical.key)
+                amounts.append(float(request.form[amount]))
+                units.append(str(request.form[unit]))
 
-        new_steps(new.key, stepArray, ingredients, ingredientCounts)
+        new_steps(new.key, stepArray, ingredients, ingredientCounts, amounts, units)
 
         find_scrap = Ingredient.query.filter_by(formula_key=new.key)
         scrap = []

@@ -141,6 +141,7 @@ $(document).ready(function() {
 
         i=0
         previousDiv=0
+
         $(".actualIngredient").each(function() {
             divId = $(this).parents(".stepDiv").attr("id")
 
@@ -149,6 +150,31 @@ $(document).ready(function() {
             }
             $(this).attr("name",divId+"_ingredient_"+i)
             previousDiv = divId
+        })
+
+        $(".ingredient_amount").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i+"_amount")
+            previousDiv = divId
+            i=i+1
+        })
+
+        i=0
+        previousDiv=0
+
+        $(".ingredient_unit").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i+"_unit")
+            previousDiv = divId
+            i=i+1
         })
 
         count = parseInt($(this).parent().prevAll('.ingredientCount').val())-1

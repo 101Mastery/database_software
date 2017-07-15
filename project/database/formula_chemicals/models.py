@@ -43,9 +43,9 @@ class Formula(db.Model):
 
     approved = db.Column(db.Boolean, default=False)
 
-    formula_yeild = db.Column(db.Float)
+    formula_yield = db.Column(db.Float)
 
-    f_yeild_unit = db.Column(db.String(10))
+    f_yield_unit = db.Column(db.String(10))
 
     dose_size = db.Column(db.Float)
 
