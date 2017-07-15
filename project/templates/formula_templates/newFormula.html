@@ -87,10 +87,11 @@ $(document).ready(function() {
 
     $(wrapper).on("click",".ingredient_button", function() {
 
-        $($(this).parent()).append('<div class="ingredient_searches"><br><input type="button" class="searchButton" value="Search"> <input type="text" class="actualIngredient" value="please enter ingredient"> <a href="#" class="remove_field_ingredient">Remove</a><br><br></div>'); //add input box
+        $($(this).parent()).append('<div class="ingredient_searches"><br><input type="button" class="searchButton" value="Search"> <input type="text" class="actualIngredient" value="please enter ingredient"><br><br> Amount: <input type="number" class="ingredient_amount" min="0" value="0"> <input list="units" class="ingredient_unit" size="4"/><a href="#" class="remove_field_ingredient">Remove</a><br><br></div>'); //add input box
 
         i=0
         previousDiv=0
+
         $(".actualIngredient").each(function() {
             divId = $(this).parents(".stepDiv").attr("id")
 
@@ -98,6 +99,34 @@ $(document).ready(function() {
                 i=0
             }
             $(this).attr("name",divId+"_ingredient_"+i)
+            previousDiv = divId
+            i=i+1
+        })
+
+        i=0
+        previousDiv=0
+
+        $(".ingredient_amount").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i+"_amount")
+            previousDiv = divId
+            i=i+1
+        })
+
+        i=0
+        previousDiv=0
+
+        $(".ingredient_unit").each(function() {
+            divId = $(this).parents(".stepDiv").attr("id")
+
+            if(divId !== previousDiv){
+                i=0
+            }
+            $(this).attr("name",divId+"_ingredient_"+i+"_unit")
             previousDiv = divId
             i=i+1
         })
@@ -198,17 +227,35 @@ $(document).ready(function() {
 
         </br>
 
+        </br>
+        </br>
+
+        Formula Yield:
+        <input type="number" name="formula_yield" value="0" min="0">
+
+        <input list="units" name="formula_yield_unit" size="4"/>
+
+        </br>
+        </br>
+
+        Dose Size:
+        <input type="number" name="dose_size" value="0" min="0">
+
+        <input list="units" name="dose_size_unit" size="4"/>
+
+        </br>
+        </br>
+
         <p>Prep Instructions: </p>
         </br>
 
     <div><textarea name='prep_instructions'rows="4" cols="50"></textarea></div>
 
 
-        <p>Instructions: </p>
+        <p>Steps: </p>
         </br>
         <div class="steps">
     <div class="stepDiv" id="step_0">
-    <input type="button" class="add_steps_button" value="Add More Steps">
     <div><textarea class="step" name='step_0'rows="4" cols="50"></textarea></div>
 
             <p>Ingredients: </p>
@@ -219,6 +266,9 @@ $(document).ready(function() {
 
         </div>
 </div>
+        <br>
+        <br>
+        <input type="button" class="add_steps_button" value="Add More Steps">
         <input type="hidden" name="stepCount" value="1" class="stepCount">
 
         <p>Quality Insurance: </p>
@@ -231,15 +281,15 @@ $(document).ready(function() {
         </br>
 
         Time Required:<br><br>
-        Days:<input type="text" name="time_required_days">
-        Hours:<input type="text" name="time_required_hr">
-        Minutes:<input type="text" name="time_required_min">
+        Days:<input type="number" name="time_required_days" value="0" min="0">
+        Hours:<input type="number" name="time_required_hr" value="0" min="0">
+        Minutes:<input type="number" name="time_required_min" value="0" min="0">
 
         </br>
         </br>
         </br>
 
-        Beyond Use: <input type="text" name="beyond_use">
+        Beyond Use: <input type="number" name="beyond_use" value="0" min="0">
 
         </br>
         </br>
@@ -249,6 +299,16 @@ $(document).ready(function() {
         <input type="radio" name="storage" value="refrigerate" > Refrigerate
         <input type="radio" name="storage" value="freeze"> Freeze
         <input type="radio" name="storage" value="deep_freeze"> Deep Freeze
+
+        </br>
+        </br>
+
+        Dosage Form:
+
+        <input type="radio" name="form" value="cream" > Cream
+        <input type="radio" name="form" value="nanoparticle"> Nanoparticle
+        <input type="radio" name="form" value="spray"> Spray
+
         </br>
         </br>
         <p>Hazards: </p>
@@ -258,6 +318,16 @@ $(document).ready(function() {
         <input type="checkbox" name="corrosive" value="true"> Corrosive<br>
         <input type="checkbox" name="toxic" value="true">Toxic<br>
 
+
+<datalist id="units">
+    <option value="kg">
+    <option value="g">
+    <option value="mg">
+    <option value="lb">
+</datalist>
+
+        </br>
+        </br>
         </br>
         </br>
 

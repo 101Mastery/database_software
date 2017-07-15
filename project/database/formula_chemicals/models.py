@@ -21,13 +21,13 @@ class Formula(db.Model):
 
     prep = db.Column(db.String(1000))
 
-    time_rq_days = db.Column(db.Integer)
+    time_rq_days = db.Column(db.Float)
 
-    time_rq_hr = db.Column(db.Integer)
+    time_rq_hr = db.Column(db.Float)
 
-    time_rq_min = db.Column(db.Integer)
+    time_rq_min = db.Column(db.Float)
 
-    beyond_use = db.Column(db.Integer)
+    beyond_use = db.Column(db.Float)
 
     storage = db.Column(db.String(80))
 
@@ -42,6 +42,14 @@ class Formula(db.Model):
     toxic = db.Column(db.Boolean, default=False)
 
     approved = db.Column(db.Boolean, default=False)
+
+    formula_yeild = db.Column(db.Float)
+
+    f_yeild_unit = db.Column(db.String(10))
+
+    dose_size = db.Column(db.Float)
+
+    d_size_unit = db.Column(db.String(10))
 
     def get_key(self):
         return self.key
@@ -92,6 +100,10 @@ class Ingredient(db.Model):
     ingredient_key = db.Column(db.String(80))
 
     step_key = db.Column(db.String(80))
+
+    amount = db.Column(db.Float)
+
+    unit = db.Column(db.String(10))
 
 
 class Instruction(db.Model):
