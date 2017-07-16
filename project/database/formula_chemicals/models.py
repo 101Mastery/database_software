@@ -109,14 +109,14 @@ class Ingredient(db.Model):
 
 
 class Instruction(db.Model):
-    __tablename__ = 'ingredient'
+    __tablename__ = 'instruction'
     __table_args__ = {'extend_existing': True}
 
     formula_key = db.Column(db.String(80))
 
     step_number = db.Column(db.Integer)
 
-    step = db.Column(db.String(1000))
+    step = db.Column(db.String(1000) )
 
     key = db.Column(db.String(80), default=uuid4())
 
@@ -124,7 +124,7 @@ class Instruction(db.Model):
 
 
 class Attachment(db.Model):
-    __tablename__ = 'ingredient'
+    __tablename__ = 'attachment'
     __table_args__ = {'extend_existing': True}
 
     name = db.Column(db.String(80))

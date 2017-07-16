@@ -19,7 +19,6 @@ def printFormulas():
     except:
         return redirect(url_for('login'))
 
-    clean_data()
     steps = Instruction.query.all()
     formulas = Formula.query.all()
     ingredients = Ingredient.query.all()
@@ -118,11 +117,9 @@ def newFormula():
                 units.append(str(request.form[unit]))
 
             new_ingredient(new.key, step_key, ingredients, amounts, units)
-            ingredient = []
+            ingredients = []
             amounts = []
             units = []
-
-
 
         db.session.commit()
         flash(new.name + " was created ")

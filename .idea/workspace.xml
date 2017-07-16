@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="517463a7-26ab-4f71-a2b0-f9c732af542c" name="Default" comment="added a createChemical method">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/database_software.iml" afterPath="$PROJECT_DIR$/.idea/database_software.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/database/formula_chemicals/models.py" afterPath="$PROJECT_DIR$/project/database/formula_chemicals/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/formulas/formula_views.py" afterPath="$PROJECT_DIR$/project/formulas/formula_views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/formulas/functions/steps.py" afterPath="$PROJECT_DIR$/project/formulas/functions/steps.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/templates/formula_templates/printFormulas.html" afterPath="$PROJECT_DIR$/project/templates/formula_templates/printFormulas.html" />
@@ -25,8 +23,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/database/formula_chemicals/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+            <state relative-caret-position="505">
+              <caret line="111" column="33" lean-forward="true" selection-start-line="111" selection-start-column="33" selection-end-line="111" selection-end-column="33" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -34,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="formula_views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="formula_views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/formulas/formula_views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+            <state relative-caret-position="1890">
+              <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding>
                 <element signature="e#52#81#0" expanded="true" />
               </folding>
@@ -49,18 +47,18 @@
       <file leaf-file-name="printFormulas.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/printFormulas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="66" column="8" lean-forward="false" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
+            <state relative-caret-position="299">
+              <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="steps.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="steps.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/formulas/functions/steps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="162">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="e#0#87#0" expanded="true" />
               </folding>
@@ -81,7 +79,7 @@
       <file leaf-file-name="newFormula.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/newFormula.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2649">
+            <state relative-caret-position="-2581">
               <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
               <folding />
             </state>
@@ -146,8 +144,8 @@
         <option value="$PROJECT_DIR$/project/templates/formula_templates/newFormula.html" />
         <option value="$PROJECT_DIR$/project/database/formula_chemicals/models.py" />
         <option value="$PROJECT_DIR$/project/templates/formula_templates/printFormulas.html" />
-        <option value="$PROJECT_DIR$/project/formulas/formula_views.py" />
         <option value="$PROJECT_DIR$/project/formulas/functions/steps.py" />
+        <option value="$PROJECT_DIR$/project/formulas/formula_views.py" />
       </list>
     </option>
   </component>
@@ -672,28 +670,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/project/formulas/functions/steps.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/project/formulas/functions/steps.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/project/formulas/functions/steps.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/project/formulas/functions/steps.py</url>
-          <line>8</line>
+          <line>9</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/project/formulas/functions/steps.py</url>
-          <line>22</line>
-          <option name="timeStamp" value="61" />
+          <line>16</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/project/formulas/functions/steps.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -706,7 +694,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="62" />
+      <option name="time" value="64" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1000,32 +988,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/newFormula.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2649">
-          <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/database/formula_chemicals/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/printFormulas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="66" column="8" lean-forward="false" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/editFormula.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -1034,22 +996,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/formulas/formula_views.py">
+    <entry file="file://$PROJECT_DIR$/project/database/formula_chemicals/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+        <state relative-caret-position="505">
+          <caret line="111" column="33" lean-forward="true" selection-start-line="111" selection-start-column="33" selection-end-line="111" selection-end-column="33" />
           <folding>
-            <element signature="e#52#81#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/newFormula.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2581">
+          <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/templates/formula_templates/printFormulas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/formulas/functions/steps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="162">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="e#0#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/formulas/formula_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1890">
+          <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding>
+            <element signature="e#52#81#0" expanded="true" />
           </folding>
         </state>
       </provider>

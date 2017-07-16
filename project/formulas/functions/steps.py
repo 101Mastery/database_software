@@ -5,15 +5,16 @@ import logging
 
 
 def new_ingredient(f_key, step_key, chemical_key_array, amount_array, unit_array):
-    for n in range(0, len(chemical_key_array)):
-        newI = Ingredient(
-            formula_key=f_key,
-            step_key=step_key,
-            ingredient_key=chemical_key_array[n],
-            amount=amount_array[n],
-            unit=unit_array[n]
-        )
-        db.session.add(newI)
+    if len(chemical_key_array) != 0:
+        for n in range(0, len(chemical_key_array)):
+            newI = Ingredient(
+                formula_key=f_key,
+                step_key=step_key,
+                ingredient_key=chemical_key_array[n],
+                amount=amount_array[n],
+                unit=unit_array[n]
+            )
+            db.session.add(newI)
 
     return
 
@@ -34,13 +35,11 @@ def new_steps(f_key, step, key, number):
 
 def clean_data():
 
-    '''
     scraps = Ingredient.query.all()
 
     for x in scraps:
         if x.amount == None:
             db.session.delete(x)
-    '''
 
     scraps = Instruction.query.all()
 
