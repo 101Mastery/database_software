@@ -7,7 +7,7 @@ from project import app
 from project.database.formula_chemicals.models import Formula, Chemical, Ingredient, Instruction
 from project.database.users.models import User
 from flask_server import db
-from project.formulas.functions.steps import new_steps
+from project.formulas.functions.steps import new_steps, clean_data, new_ingredient
 import uuid
 
 
@@ -19,9 +19,12 @@ def printFormulas():
     except:
         return redirect(url_for('login'))
 
+    clean_data()
+    steps = Instruction.query.all()
     formulas = Formula.query.all()
     ingredients = Ingredient.query.all()
-    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user, ingredients=ingredients)
+
+    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user, steps=steps, ingredients=ingredients)
 
 
 @app.route('/formula/new', methods=['GET', 'POST'])
@@ -83,7 +86,6 @@ def newFormula():
             new.toxic = False
 
         db.session.add(new)
-        db.session.commit()
 
         stepArray=[]
         ingredientCounts=[]
@@ -95,7 +97,9 @@ def newFormula():
             count='ingredientCount_'+str(i)
             ingredientCounts.append(request.form[count])
             name = 'step_'+str(i)
-            stepArray.append(request.form[name])
+            step_key = uuid.uuid4()
+
+            new_steps(new.key, request.form[name], step_key, i)
 
             for n in range(0, int(ingredientCounts[i])):
                 ingredientSearch='step_'+str(i)+'_ingredient_'+str(n)
@@ -113,21 +117,14 @@ def newFormula():
                 amounts.append(float(request.form[amount]))
                 units.append(str(request.form[unit]))
 
-        new_steps(new.key, stepArray, ingredients, ingredientCounts, amounts, units)
+            new_ingredient(new.key, step_key, ingredients, amounts, units)
+            ingredient = []
+            amounts = []
+            units = []
 
-        find_scrap = Ingredient.query.filter_by(formula_key=new.key)
-        scrap = []
 
-        for i in find_scrap:
-            working_step = i.step_key
-            working_ing = i.ingredient_key
-            if working_step == None and working_ing == None:
-                scrap.append(i)
 
-        for x in scrap:
-            db.session.delete(x)
-            db.session.commit()
-
+        db.session.commit()
         flash(new.name + " was created ")
         return redirect(url_for('printFormulas', user=user))
     else:
