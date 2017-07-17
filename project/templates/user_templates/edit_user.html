@@ -29,13 +29,13 @@
         </br>
 
         <p>Title: </p>
-        <input value="{{editable.title}}" list="titles" name="title" />
-<datalist id="titles">
-    <option value="Manager">
-    <option value="Technician">
-    <option value="Tester">
-    <option value="Quality Assurance">
-</datalist>
+    <select name="title" value="{{editable.title}}" >
+        <option value="{{editable.title}}">{{editable.title}}</option>
+        <option value="Manager">Manager</option>
+        <option value="Technician">Technician</option>
+        <option value="Tester">Tester</option>
+        <option value="Quality Assurance">Quality Assurance</option>
+    </select>
 
         </br>
         </br>

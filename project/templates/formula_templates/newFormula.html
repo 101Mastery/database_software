@@ -27,7 +27,11 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="stepDiv" ><textarea class="step" rows="4" cols="50"></textarea> <a href="#" class="remove_field">Remove</a><br><div> <p>Ingredients: </p><input type="button" class="ingredient_button"  value="Add new Ingredient"><input type="hidden" value="0" class="ingredientCount"></div><br>'); //add input box
+            $(wrapper).append('<div class="stepDiv" ><textarea class="step" rows="4" cols="50"></textarea> \
+             <a href="#" class="remove_field">Remove</a><br><div> \
+             <p>Ingredients: </p>\
+             <input type="button" class="ingredient_button"  value="Add new Ingredient">\
+             <input type="hidden" value="0" class="ingredientCount"></div><br>'); //add input box
 
         }
 
@@ -87,7 +91,16 @@ $(document).ready(function() {
 
     $(wrapper).on("click",".ingredient_button", function() {
 
-        $($(this).parent()).append('<div class="ingredient_searches"><br><input type="button" class="searchButton" value="Search"> <input type="text" class="actualIngredient" value="please enter ingredient"><br><br> Amount: <input type="number" class="ingredient_amount" min="0" value="0"> <input list="units" class="ingredient_unit" size="4"/><a href="#" class="remove_field_ingredient">Remove</a><br><br></div>'); //add input box
+        $($(this).parent()).append('<div class="ingredient_searches"><br><input type="button" class="searchButton" \
+            value="Search"> <input type="text" class="actualIngredient" value="please enter ingredient"><br><br> \
+            Amount: <input type="number" class="ingredient_amount" min="0" value="0"> \
+            <select class="ingredient_unit"> \
+            <option value="kg">kg</option> \
+            <option value="g">g</option> \
+            <option value="mg">mg</option> \
+            <option value="lb">lb</option> \
+        </select> \
+            <a href="#" class="remove_field_ingredient">Remove</a><br><br></div>'); //add input box
 
         i=0
         previousDiv=0
@@ -196,7 +209,8 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><br>Select a file: <input type="file" name="upload"> <a href="#" class="remove_field">Remove</a><br>'); //add input box
+            $(wrapper).append('<div><br>Select a file: <input type="file" name="upload"> \
+            <a href="#" class="remove_field">Remove</a><br>'); //add input box
         }
     });
 
@@ -259,7 +273,12 @@ $(document).ready(function() {
         Formula Yield:
         <input type="number" name="formula_yield" value="0" min="0">
 
-        <input list="units" name="formula_yield_unit" size="4"/>
+        <select name="formula_yield_unit">
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="mg">mg</option>
+            <option value="lb">lb</option>
+        </select>
 
         </br>
         </br>
@@ -267,7 +286,12 @@ $(document).ready(function() {
         Dose Size:
         <input type="number" name="dose_size" value="0" min="0">
 
-        <input list="units" name="dose_size_unit" size="4"/>
+        <select name="dose_size_unit">
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="mg">mg</option>
+            <option value="lb">lb</option>
+        </select>
 
         </br>
         </br>
