@@ -32,19 +32,3 @@ def new_steps(f_key, step, key, number):
 
     return
 
-
-def clean_data():
-
-    scraps = Ingredient.query.all()
-
-    for x in scraps:
-        if x.amount == None:
-            db.session.delete(x)
-
-    scraps = Instruction.query.all()
-
-    for x in scraps:
-        if x.step == None:
-            db.session.delete(x)
-
-    db.session.commit()

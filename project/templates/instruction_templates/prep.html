@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
+<h1>{{formula.name}}</h1>
+
+
+    <p>Description: {{formula.description}}</p>
+
+    <p>Ingredients needed</p>
+
+    {% for i in range(0,len(ingredients)) %}
+
+    {{chemical_name[i]}} {{ingredients[i].amount}} {{ingredients[i].unit}}
+
+    {% endfor %}
+
+    <p>instructions: {{formula.prep}}</p>
+
+    </br>
+    </br>
+    <a href = '{{url_for('printFormulas')}}'> <input type = 'button' value='Back'></a>
+
+
+
+</body>
+</html>

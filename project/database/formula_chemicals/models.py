@@ -97,6 +97,8 @@ class Ingredient(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    ingredient_name = db.Column(db.String(80))
+
     formula_key = db.Column(db.String(80))
 
     ingredient_key = db.Column(db.String(80))

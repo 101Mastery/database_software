@@ -7,7 +7,7 @@ from project import app
 from project.database.formula_chemicals.models import Formula, Chemical, Ingredient, Instruction
 from project.database.users.models import User
 from flask_server import db
-from project.formulas.functions.steps import new_steps, clean_data, new_ingredient
+from project.formulas.functions.steps import new_steps, new_ingredient
 import uuid
 
 
@@ -19,11 +19,9 @@ def printFormulas():
     except:
         return redirect(url_for('login'))
 
-    steps = Instruction.query.all()
     formulas = Formula.query.all()
-    ingredients = Ingredient.query.all()
 
-    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user, steps=steps, ingredients=ingredients)
+    return render_template('formula_templates/printFormulas.html', formulas=formulas, user=user)
 
 
 @app.route('/formula/new', methods=['GET', 'POST'])
@@ -215,7 +213,7 @@ def deleteFormula(formula_id):
         return render_template('formula_templates/deleteFormula.html', formula_id=formula_id, formulaName=deletable.name, user=user)
 
 
-@app.route('/formula/<int:formula_id>/view/', methods=['GET'])
+@app.route('/formula/<int:formula_id>/prep/', methods=['GET'])
 def viewFormula(formula_id):
 
     try:
@@ -224,6 +222,18 @@ def viewFormula(formula_id):
         return redirect(url_for('login'))
 
     formula = Formula.query.filter_by(id=formula_id).one()
+    ingredients = Ingredient.query.filter_by(formula_key=formula.key)
 
-    return render_template('formula_templates/view_formula.html', formula_id=formula_id, formula=formula, user=user)
+    chemical_names = []
+
+    for i in ingredients:
+        chemical = Chemical.query.filter_by(key=i.ingredient_key)
+        chemical_names.append(chemical.name)
+
+    return render_template('instruction_templates/prep.html',
+                           formula_id=formula_id,
+                           formula=formula,
+                           user=user,
+                           ingredients=ingredients,
+                           chemical_names=chemical_names)
 
