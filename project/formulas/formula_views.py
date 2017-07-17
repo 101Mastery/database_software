@@ -84,7 +84,6 @@ def newFormula():
 
         db.session.add(new)
 
-        stepArray=[]
         ingredientCounts=[]
         ingredients=[]
         amounts=[]
@@ -110,7 +109,7 @@ def newFormula():
                         chemical = t
                         break
 
-                ingredients.append(chemical.key)
+                ingredients.append(chemical)
                 amounts.append(float(request.form[amount]))
                 units.append(str(request.form[unit]))
 
@@ -224,16 +223,9 @@ def viewFormula(formula_id):
     formula = Formula.query.filter_by(id=formula_id).one()
     ingredients = Ingredient.query.filter_by(formula_key=formula.key)
 
-    chemical_names = []
-
-    for i in ingredients:
-        chemical = Chemical.query.filter_by(key=i.ingredient_key)
-        chemical_names.append(chemical.name)
-
     return render_template('instruction_templates/prep.html',
                            formula_id=formula_id,
                            formula=formula,
                            user=user,
                            ingredients=ingredients,
-                           chemical_names=chemical_names)
-
+                           previous_step=0)

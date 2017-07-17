@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>user: {{user.name}}</p>
+    <a href='{{url_for('logout')}}'>logout</a>
+    </br>
+    </br>
+    </br>
+<h1>{{formula.name}}</h1>
+<h2>Step {{step.step_number + 1}}</h2>
+
+    <p>Ingredients needed:</p>
+
+    {% for i in ingredients %}
+
+    {{i.ingredient_name}} {{i.amount}} {{i.unit}}
+    </br>
+    </br>
+    {% endfor %}
+
+    <p>instructions: {{step.step}}</p>
+
+    </br>
+    </br>
+
+    {% if step.step_number-1 < 0 %}
+        <a href = '{{url_for('viewFormula', formula_id = formula_id)}}'> <input type = 'button' value='Back'></a>
+    {% else %}
+        <a href = '{{url_for('print_step', formula_id = formula_id, step_number = step.step_number - 1)}}'> <input type = 'button' value='Back'></a>
+    {% endif %}
+
+    {% if max_step_number == False %}
+    <a href = '{{url_for('print_step', formula_id = formula_id, step_number = step.step_number + 1 )}}'> <input type = 'button' value='Next'></a>
+    {% endif %}
+
+</body>
+</html>

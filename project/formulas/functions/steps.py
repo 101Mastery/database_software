@@ -4,13 +4,14 @@ import uuid
 import logging
 
 
-def new_ingredient(f_key, step_key, chemical_key_array, amount_array, unit_array):
-    if len(chemical_key_array) != 0:
-        for n in range(0, len(chemical_key_array)):
+def new_ingredient(f_key, step_key, chemical_array, amount_array, unit_array):
+    if len(chemical_array) != 0:
+        for n in range(0, len(chemical_array)):
             newI = Ingredient(
                 formula_key=f_key,
                 step_key=step_key,
-                ingredient_key=chemical_key_array[n],
+                ingredient_name=chemical_array[n].name,
+                ingredient_key=chemical_array[n].key,
                 amount=amount_array[n],
                 unit=unit_array[n]
             )

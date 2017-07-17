@@ -10,16 +10,18 @@
     </br>
     </br>
     </br>
-<h1>{{formula.name}}</h1>
+<h1>{{formula.name}} Prep</h1>
 
 
     <p>Description: {{formula.description}}</p>
 
-    <p>Ingredients needed</p>
+    <p>Ingredients needed:</p>
 
-    {% for i in range(0,len(ingredients)) %}
+    {% for i in ingredients %}
 
-    {{chemical_name[i]}} {{ingredients[i].amount}} {{ingredients[i].unit}}
+    {{i.ingredient_name}} {{i.amount}} {{i.unit}}
+    </br>
+    </br>
 
     {% endfor %}
 
@@ -28,7 +30,7 @@
     </br>
     </br>
     <a href = '{{url_for('printFormulas')}}'> <input type = 'button' value='Back'></a>
-
+    <a href = '{{url_for('print_step', formula_id=formula_id, step_number=0)}}'> <input type = 'button' value='Next'></a>
 
 
 </body>

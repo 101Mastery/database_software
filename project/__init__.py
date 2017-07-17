@@ -13,3 +13,4 @@ import project.formulas.formula_views
 import project.login.login_view
 import project.user.user_creator_menu
 import project.chemicals.chemical_views
+import project.instructions.step_views
