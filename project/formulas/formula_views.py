@@ -48,7 +48,7 @@ def newFormula():
             dose_size=request.form['dose_size'],
             d_size_unit=request.form['dose_size_unit'],
             dose_form=request.form['form'],
-            key=uuid.uuid4())
+            key=str(uuid.uuid4()))
 
         x = request.form['stepCount']
 
@@ -93,7 +93,7 @@ def newFormula():
             count='ingredientCount_'+str(i)
             ingredientCounts.append(request.form[count])
             name = 'step_'+str(i)
-            step_key = uuid.uuid4()
+            step_key = str(uuid.uuid4())
 
             new_steps(new.key, request.form[name], step_key, i)
 

@@ -7,6 +7,7 @@ from project import app
 from project.database.formula_chemicals.models import Chemical
 from project.database.users.models import User
 from flask_server import db
+import uuid
 
 
 @app.route('/chemical')
@@ -30,7 +31,12 @@ def newChemical():
         return redirect(url_for('login'))
 
     if request.method == 'POST':
-        new = Chemical(name=request.form['name'], user_key=user.key, cas=request.form['cas'], beyond_use=request.form['beyond_use'], storage=request.form['storage'])
+        new = Chemical(name=request.form['name'],
+                       user_key=user.key,
+                       cas=request.form['cas'],
+                       beyond_use=request.form['beyond_use'],
+                       storage=request.form['storage'],
+                       key=str(uuid.uuid4()))
 
         try:
             if str(request.form['explosive']) == 'true':

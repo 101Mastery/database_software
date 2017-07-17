@@ -11,10 +11,13 @@ import uuid
 
 @app.route('/user')
 def printUsers():
-    try:
-        user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
-    except:
-        return redirect(url_for('login'))
+    if db.session.login:
+        try:
+            user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
+        except:
+            return redirect(url_for('login'))
+    else:
+        user = None
 
     users = User.query.all()
     return render_template('user_templates/creation_menu.html', users=users, user=user)
@@ -23,10 +26,14 @@ def printUsers():
 @app.route('/user/new', methods=['GET', 'POST'])
 def newUser():
 
-    try:
-        user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
-    except:
-        return redirect(url_for('login'))
+    if db.session.login:
+        try:
+            user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
+        except:
+            return redirect(url_for('login'))
+
+    else:
+        user = None
 
     if request.method == 'POST':
 
@@ -34,7 +41,7 @@ def newUser():
                    title=request.form['title'],
                    user_name=request.form['user_name'],
                    password=request.form['password'],
-                   key=uuid.uuid4())
+                   key=str(uuid.uuid4()))
 
         db.session.add(new)
         db.session.commit()
@@ -79,10 +86,14 @@ def editUser(user_id):
 @app.route('/user/<int:user_id>/delete/', methods=['GET', 'POST'])
 def deleteUser(user_id):
 
-    try:
-        user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
-    except:
-        return redirect(url_for('login'))
+    if db.session.login:
+        try:
+            user = User.query.filter_by(user_name=request.cookies.get('UserCookie')).one()
+        except:
+            return redirect(url_for('login'))
+
+    else:
+        user = None
 
     deletable = User.query.filter_by(id=user_id).one()
     if request.method == 'POST':
